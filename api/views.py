@@ -25,7 +25,8 @@ class MoviesView(GenericViewSet,ListModelMixin,RetrieveModelMixin):
     serializer_class=MovieSerializer
     queryset=Movies.objects.all()
     # authentication_classes=[JWTAuthentication]
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     @action(methods=['post'],detail=True)
     def add_review(self,request,*args,**kwargs):
@@ -41,7 +42,9 @@ class MoviesView(GenericViewSet,ListModelMixin,RetrieveModelMixin):
 class ReviewsView(GenericViewSet,UpdateModelMixin,DestroyModelMixin):
     serializer_class=ReviewSerializer
     queryset=Reviews.objects.all()
-    authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
+
+    # authentication_classes=[authentication.BasicAuthentication]
     # authentication_classes=[JWTAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     permission_classes=[IsOwner]

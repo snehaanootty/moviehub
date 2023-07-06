@@ -19,6 +19,8 @@ from api import views as api_view
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 from rest_framework import permissions
@@ -50,4 +52,4 @@ urlpatterns = [
     path("api/v1/token/refresh/",TokenRefreshView.as_view()),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 
-]+router.urls
+]+router.urls+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
